@@ -12,6 +12,8 @@ using iMobileDevice.Plist;
 using iMobileDevice.Restore;
 using iMobileDevice.Recovery;
 using System.Net;
+using Microsoft.Win32;
+using System.IO;
 
 namespace iDeviceToolbox
 {
@@ -343,6 +345,76 @@ namespace iDeviceToolbox
                     }
                 };
 
+            }
+        }
+        //futureRestoreButton_Click (ask user for IPSW and BLOB then launch futurerestore with -t <BLOB> -0 -1 <IPSW>)
+        private void futureRestoreButton_Click(object sender, RoutedEventArgs e)
+        {
+            // hide the recoveryModeButton
+            recoveryModeButton.Visibility = Visibility.Hidden;
+            // hide the futureRestoreButton
+            futureRestoreButton.Visibility = Visibility.Hidden;
+            // if futurerestore.exe is not found, download it from https://cdn.discordapp.com/attachments/917198974555942942/1031110605089816606/futurerestore_300_local_win_x64.exe
+            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "win-x64\\futurerestore.exe"))
+            {
+                MessageBox.Show("futurerestore.exe not found, downloading it now...", "iDeviceToolbox", MessageBoxButton.OK, MessageBoxImage.Information);
+                using (WebClient wc = new WebClient())
+                {
+                    wc.DownloadFile("https://cdn.discordapp.com/attachments/917198974555942942/1031110605089816606/futurerestore_300_local_win_x64.exe", AppDomain.CurrentDomain.BaseDirectory + "win-x64\\futurerestore.exe");
+                }
+            }
+            // ask user for IPSW and BLOB
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "IPSW Files (*.ipsw)|*.ipsw|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.Multiselect = false;
+            if (openFileDialog.ShowDialog() == true)
+            {
+                // ask user for BLOB
+                OpenFileDialog openFileDialog2 = new OpenFileDialog();
+                openFileDialog2.Filter = "BLOB Files (*.shsh2)|*.shsh2|All files (*.*)|*.*";
+                openFileDialog2.FilterIndex = 1;
+                openFileDialog2.Multiselect = false;
+                if (openFileDialog2.ShowDialog() == true)
+                {
+                    // launch futurerestore with -t <BLOB> -0 -1 <IPSW>
+                    using (Process p = new Process())
+                    {
+                        p.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + "win-x64\\futurerestore.exe";
+                        p.StartInfo.Arguments = "-t " + openFileDialog2.FileName + " -0 -1 " + openFileDialog.FileName;
+                        // log ALL the output to futureRestoreBox
+                        p.StartInfo.RedirectStandardOutput = true;
+                        p.OutputDataReceived += (sender2, e2) => {
+                            Dispatcher.Invoke(() =>
+                            {
+                                futureRestoreBox.AppendText(e2.Data + Environment.NewLine);
+                                futureRestoreBox.ScrollToEnd();
+                            });
+                        };
+                        p.StartInfo.CreateNoWindow = true;
+                        p.StartInfo.UseShellExecute = false;
+                        p.Start();
+                        p.BeginOutputReadLine();
+                    }
+                } else {
+                    Dispatcher.Invoke(() =>
+                    {
+                        futureRestoreBox.AppendText("No BLOB selected." + Environment.NewLine);
+                        futureRestoreBox.ScrollToEnd();
+                        // enable the buttons again
+                        recoveryModeButton.Visibility = Visibility.Visible;
+                        futureRestoreButton.Visibility = Visibility.Visible;
+                    });
+                }
+            } else {
+                Dispatcher.Invoke(() =>
+                {
+                    futureRestoreBox.AppendText("No IPSW selected." + Environment.NewLine);
+                    futureRestoreBox.ScrollToEnd();
+                    // enable the buttons again
+                    recoveryModeButton.Visibility = Visibility.Visible;
+                    futureRestoreButton.Visibility = Visibility.Visible;
+                });
             }
         }
     }

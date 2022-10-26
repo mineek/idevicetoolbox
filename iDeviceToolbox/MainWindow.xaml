@@ -210,11 +210,15 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label x:Name="recoveryModeLabel" Grid.Row="0" Content="Recovery Mode" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Margin="0,0,0,100" Foreground="White"/>
                     <Label x:Name="recoveryModeHint" Grid.Row="1" Content="Your device is in recovery mode" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
                     <Label x:Name="recoveryModeEcid" Grid.Row="2" Content="ECID: " HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
                     <Button x:Name="recoveryModeButton" Grid.Row="3" Content="Exit Recovery Mode" Click="exitRecoveryModeButton_Click" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Foreground="White" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <Button x:Name="futureRestoreButton" Grid.Row="4" Content="FutureRestore" Click="futureRestoreButton_Click" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Foreground="White" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <TextBox x:Name="futureRestoreBox" Grid.Row="5" TextWrapping="Wrap" Text="" FontSize="18" Foreground="White" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Margin="10,0,10,10" Grid.RowSpan="4"/>
                 </Grid>
             </Grid>
     </Grid>
