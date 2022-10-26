@@ -1,0 +1,221 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        x:Name="window"
+        x:Class="iDeviceToolbox.MainWindow"
+        Title="iDeviceToolbox" Height="600" Width="800" ResizeMode="CanMinimize" Loaded="Window_Loaded">
+    <Grid Background="#FF1E1E1E">
+        <Grid x:Name="connectToPC" Background="#FF1E1E1E" Margin="1,30,1,1">
+            <Label x:Name="pleaseConnectLabel" Content="Please connect your device" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Margin="0,0,0,100" Foreground="White"/>
+            <Label x:Name="itunesHint" Content="Make sure you have iTunes installed." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+        </Grid>
+        <!-- dashboard with the different modes on the left side and the content on the right side -->
+        <Grid x:Name="dashboard" Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Background="#FF1E1E1E">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="titleLabel" Content="iDeviceToolbox" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,10,0" Foreground="White" FontSize="18"/>
+                <Label x:Name="versionLabel" Content="Version GETTING_VERSION_DATA" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,10,0" Foreground="White" FontSize="12"/>
+                <Button x:Name="infoButton" Grid.Row="1" Content="Info" Click="infoButton_Click" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Foreground="White" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Button x:Name="restoreButton" Grid.Row="2" Content="Restore" Click="restoreButton_Click" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Foreground="White" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Button x:Name="recoveryButton" Grid.Row="3" Content="Recovery" Click="recoveryButton_Click" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Foreground="White" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Button x:Name="utilitiesButton" Grid.Row="4" Content="Utilities" Click="utilitiesButton_Click" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Foreground="White" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Button x:Name="syslogButton" Grid.Row="5" Content="Syslog" Click="syslogButton_Click" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Foreground="White" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Button x:Name="jailbreaksButton" Grid.Row="6" Content="Jailbreaks" Click="jailbreaksButton_Click" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Foreground="White" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Button x:Name="aboutButton" Grid.Row="7" Content="About" Click="aboutButton_Click" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Foreground="White" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </Grid>
+            <!-- for now they're all WIP -->
+            <Grid x:Name="infoContent" Grid.Column="1" Grid.Row="0" Grid.RowSpan="5" Background="#FF1E1E1E">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="infoLabel" Grid.Row="0" Content="Info" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Margin="0,0,0,100" Foreground="White"/>
+                <Label x:Name="infoHint" Grid.Row="1" Content="Information about your device" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+                <!-- info content such as Device Name and UDID -->
+                <Label x:Name="deviceNameLabel" Grid.Row="2" Content="Device Name:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" Margin="10,0,0,0" Foreground="White"/>
+                <Label x:Name="deviceName" Grid.Row="2" Content="Device Name" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" Margin="0,0,10,0" Foreground="White"/>
+                <Label x:Name="udidLabel" Grid.Row="3" Content="UDID:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" Margin="10,0,0,0" Foreground="White"/>
+                <Label x:Name="udid" Grid.Row="3" Content="UDID" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" Margin="0,0,10,0" Foreground="White"/>
+                <!-- software ver -->
+                <Label x:Name="softwareVerLabel" Grid.Row="4" Content="Software Version:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" Margin="10,0,0,0" Foreground="White"/>
+                <Label x:Name="softwareVer" Grid.Row="4" Content="Software Version" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" Margin="0,0,10,0" Foreground="White"/>
+                <!-- storage space -->
+                <Label x:Name="storageSpaceLabel" Grid.Row="5" Content="Storage Space:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" Margin="10,0,0,0" Foreground="White"/>
+                <Label x:Name="storageSpaceShown" Grid.Row="5" Content="Storage Space" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" Margin="0,0,10,0" Foreground="White"/>
+                <!-- more info -->
+                <Label x:Name="productTypeLabel" Grid.Row="6" Content="Product Type:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" Margin="10,0,0,0" Foreground="White"/>
+                <Label x:Name="productTypeShown" Grid.Row="6" Content="Product Type" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" Margin="0,0,10,0" Foreground="White"/>
+                <!-- hide sensitive data -->
+                <CheckBox x:Name="hideSensitiveData" Grid.Row="7" Content="Hide Sensitive Data" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" Margin="10,0,0,0" Foreground="White" Checked="hideSensitiveData_Checked" Unchecked="hideSensitiveData_Unchecked"/>
+            </Grid>
+            <Grid x:Name="restoreContent" Grid.Column="1" Grid.Row="0" Grid.RowSpan="5" Background="#FF1E1E1E">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="restoreLabel" Grid.Row="0" Content="Restore" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Margin="0,0,0,100" Foreground="White"/>
+                <Label x:Name="restoreHint" Grid.Row="1" Content="Restore your iDevice using a downloaded IPSW file" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+                <Label x:Name="restoreWarning" Grid.Row="2" Content="WARNING: This will erase all data on your device!" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="Red"/>
+                <Button x:Name="restoreButton2" Grid.Row="3" Content="Restore" Click="restoreButton2_Click" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Foreground="White" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <!-- restorelogbox -->
+                <!--<TextBox x:Name="restoreLogBox" Grid.Row="4" TextWrapping="Wrap" Text="Restore Log" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="18" Foreground="White" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Margin="10,0,10,10"/>-->
+            </Grid>
+            <Grid x:Name="recoveryContent" Grid.Column="1" Grid.Row="0" Grid.RowSpan="5" Background="#FF1E1E1E">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="recoveryLabel" Grid.Row="0" Content="Recovery" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Margin="0,0,0,100" Foreground="White"/>
+                <Label x:Name="recoveryHint" Grid.Row="1" Content="What do you want to do?" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+                <Button x:Name="recoveryButton1" Grid.Row="2" Content="Put Device in Recovery Mode" Click="recoveryButton1_Click" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Foreground="White" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </Grid>
+            <!-- utilities where u can enable assistivetouch -->
+            <Grid x:Name="utilitiesContent" Grid.Column="1" Grid.Row="0" Grid.RowSpan="5" Background="#FF1E1E1E">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="utilitiesLabel" Grid.Row="0" Content="Utilities" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Margin="0,0,0,100" Foreground="White"/>
+                <Label x:Name="utilitiesHint" Grid.Row="1" Content="Nice little extra settings" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+                <Button x:Name="utilitiesButton1" Grid.Row="2" Content="Enable AssistiveTouch" Click="enableAssistiveTouch" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Foreground="White" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Button x:Name="utilitiesButton2" Grid.Row="3" Content="Disable AssistiveTouch" Click="disableAssistiveTouch" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Foreground="White" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <!-- start SSH tunnel -->
+                <Button x:Name="utilitiesButton3" Grid.Row="4" Content="Start SSH Tunnel" Click="startSSHTunnel" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Foreground="White" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </Grid>
+            <!-- syslog page -->
+            <Grid x:Name="syslogContent" Grid.Column="1" Grid.Row="0" Grid.RowSpan="5" Background="#FF1E1E1E">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="syslogLabel" Grid.Row="0" Content="Syslog" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Margin="0,0,0,100" Foreground="White"/>
+                <Label x:Name="syslogHint" Content="View the syslog of your device" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+                <!-- syslogbox the size of the window -->
+                <TextBox x:Name="syslogBox" Grid.Row="1" TextWrapping="Wrap" Text="Syslog" FontSize="18" Foreground="White" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Margin="10,0,10,10" Grid.RowSpan="4"/>
+
+            </Grid>
+            <!-- jailbreaks page -->
+            <Grid x:Name="jailbreaksContent" Grid.Column="1" Grid.Row="0" Grid.RowSpan="5" Background="#FF1E1E1E">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="jailbreaksLabel" Grid.Row="0" Content="Jailbreaks" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Margin="0,0,0,100" Foreground="White"/>
+                <Label x:Name="jailbreaksHint" Grid.Row="1" Content="Jailbreak your device" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+                <Label x:Name="jailbreaksWarning" Grid.Row="2" Content="WARNING: Jailbreaking may cause damage to your device. Use at your own risk." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" Foreground="Red"/>
+                <Label x:Name="jailbreakisCompatible" Grid.Row="3" Content="Compatible with:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+                <Button x:Name="jailbreaksButton1" Grid.Row="4" Content="Jailbreak" Click="jailbreaksButton1_Click" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Foreground="White" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox x:Name="jailbreaksBox" Grid.Row="5" TextWrapping="Wrap" Text="" FontSize="18" Foreground="White" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Margin="10,0,10,10" Grid.RowSpan="4"/>
+            </Grid>
+            <!-- about page -->
+            <Grid x:Name="aboutContent" Grid.Column="1" Grid.Row="0" Grid.RowSpan="5" Background="#FF1E1E1E">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="aboutLabel" Grid.Row="0" Content="About" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Margin="0,0,0,100" Foreground="White"/>
+                <Label x:Name="aboutHint" Grid.Row="1" Content="About iDeviceToolbox" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+                <Label x:Name="aboutAuthor" Grid.Row="3" Content="Made by mineek" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+                <Label x:Name="aboutLabel2" Grid.Row="6" Content="Credits" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Margin="0,0,0,100" Foreground="White"/>
+                <Label x:Name="credit1" Grid.Row="7" Content="iDeviceToolbox uses the following open source software:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+                <Label x:Name="credit2" Grid.Row="8" Content="libimobiledevice" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+                <Label x:Name="aboutLabel3" Grid.Row="9" Content="Thanks to:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Margin="0,0,0,100" Foreground="White"/>
+                <Label x:Name="credit3" Grid.Row="10" Content="Cryptic - Letting me use futurerestore" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+                <Label x:Name="credit4" Grid.Row="12" Content="All the wonderful people on the r/jailbreak discord - giving me ideas." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+                <Label x:Name="icraze" Grid.Row="11" Content="iCraze - TrollStore install method" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+                <Label x:Name="credit5" Grid.Row="13" Content="In particular (alphabetical order): coldi, flower, nebula, galaxy" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+                <Label x:Name="thanks" Grid.Row="14" Content="Thanks." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+            </Grid>
+        </Grid>
+            <!-- recovery mode screen -->
+            <Grid x:Name="recoveryMode" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="5" Background="#FF1E1E1E" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid x:Name="recoveryModeContent" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="5" Background="#FF1E1E1E">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label x:Name="recoveryModeLabel" Grid.Row="0" Content="Recovery Mode" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Margin="0,0,0,100" Foreground="White"/>
+                    <Label x:Name="recoveryModeHint" Grid.Row="1" Content="Your device is in recovery mode" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+                    <Label x:Name="recoveryModeEcid" Grid.Row="2" Content="ECID: " HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+                    <Button x:Name="recoveryModeButton" Grid.Row="3" Content="Exit Recovery Mode" Click="exitRecoveryModeButton_Click" Background="#FF1E1E1E" BorderBrush="#FF1E1E1E" Foreground="White" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                </Grid>
+            </Grid>
+    </Grid>
+</Window>
